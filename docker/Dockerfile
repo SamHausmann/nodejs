@@ -1,19 +1,16 @@
-FROM node:4.2.6
+FROM rosetteapi/docker-base-layer
 MAINTAINER Sam Hausmann
+ENV LANGUAGE=nodejs
 
 #install necessary packages
-RUN apt-get -y update && apt-get install -y git && apt-get install -y vim && apt-get install -y curl
+RUN apt-get -y update && apt-get install -y \
+	nodejs \
+	npm
 
 RUN npm install -g grunt-cli && npm install -g eslint
 
 ENV API_KEY api_key
 
-RUN mkdir /nodejs-dev
-COPY runAll.sh /nodejs-dev/runAll.sh
-RUN chmod 0755 /nodejs-dev/runAll.sh
+RUN mkdir /test-dev/tests
 
-#set the working directory
-WORKDIR /nodejs-dev
-
-CMD ./runAll.sh
-VOLUME ["/source"]
+CMD ./docker-entrypoint.sh $API_KEY $FILENAME $ALT_URL $LANGUAGE; /bin/bash
