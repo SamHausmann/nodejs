@@ -13,4 +13,4 @@ ENV API_KEY api_key
 
 RUN mkdir /test-dev/tests
 
-CMD ./docker-entrypoint.sh $API_KEY $FILENAME $ALT_URL $LANGUAGE; /bin/bash
+CMD ./docker-entrypoint.sh $API_KEY $FILENAME $ALT_URL $LANGUAGE
